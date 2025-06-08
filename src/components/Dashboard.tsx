@@ -60,10 +60,10 @@ const DashBoard = () => {
     <div className="bg-white w-full flex flex-col">
       <main className="flex-1 flex flex-col overflow-y-auto">
         <div className="flex-1 px-4 py-6 sm:px-6 md:px-10">
-          <div className="max-w-7xl mx-auto space-y-10">
+          <div className="max-w-7xl mx-auto flex flex-col gap-[28px] sm:mt-6 md:mt-12">
 
             {/* Welcome Section */}
-            <div className="text-center space-y-2 mt-8">
+            <div className="text-center space-y-2">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
                 Welcome to AI Assistant
               </h1>
