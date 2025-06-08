@@ -63,7 +63,7 @@ const DashBoard = () => {
           <div className="max-w-7xl mx-auto space-y-10">
 
             {/* Welcome Section */}
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-2 mt-8">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
                 Welcome to AI Assistant
               </h1>
@@ -84,17 +84,6 @@ const DashBoard = () => {
                 />
               ))}
             </div> */}
-
-            {/* Instructional Section */}
-            <div className="text-center">
-              <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
-                Want to get the most out of your AI assistant?
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                Start with a clear and specific prompt. Be as detailed as possible about your desired outcome.
-                <a href="/instruction" className="text-blue-500 hover:underline">Instructions</a>
-              </p>
-            </div>
 
             {/* Prompt Cards */}
             <div>
