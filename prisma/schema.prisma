@@ -67,3 +67,23 @@ model Verification {
 
   @@map("verification")
 }
+
+model History {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  userId  String
+}
+
+model Conversation {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  historyId    String
+  userId       String
+  conversation String
+  role         Role
+}
+
+enum Role {
+  user
+  assistant
+}

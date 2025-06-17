@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChatSquareText } from "react-icons/bs";
 import { GoHistory } from "react-icons/go";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Kalam } from "next/font/google";
-
-const kalam = Kalam({ weight: "400", subsets: ["latin"] });
+import Link from "next/link";
 import {
   Sidebar,
   SidebarContent,
@@ -17,17 +16,25 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
+import { getHistoryTitles } from "@/lib/actions";
+import { authClient } from "@/lib/auth-client";
 
-// Dummy chat history
-const chatHistory = [
-  { id: "1", title: "Chat with GPT-4", url: "/chats/1" },
-  { id: "2", title: "Interview Prep", url: "/chats/2" },
-  { id: "3", title: "Project Ideas", url: "/chats/3" },
-];
+const kalam = Kalam({ weight: "400", subsets: ["latin"] });
 
 export function AppSidebar() {
   const [showHistory, setShowHistory] = useState(false);
+  const [history, setHistory] = useState<{ id: string; title: string }[]>([]);
+  const { data: session } = authClient.useSession();
+  const userId = session?.user?.id;
+
+  useEffect(() => {
+    if (!userId) return;
+    const fetchHistoryTitles = async () => {
+      const historyRes = await getHistoryTitles(userId);
+      setHistory(historyRes);
+    };
+    fetchHistoryTitles();
+  }, [userId]);
 
   return (
     <Sidebar>
@@ -63,10 +70,10 @@ export function AppSidebar() {
 
               {/* Sub-items under History */}
               {showHistory &&
-                chatHistory.map((chat) => (
+                history.map((chat) => (
                   <SidebarMenuItem key={chat.id} className="pl-6">
                     <SidebarMenuButton asChild>
-                      <Link href={chat.url}>
+                      <Link href={`/chats/${chat.id}`}>
                         <span className="text-sm">{chat.title}</span>
                       </Link>
                     </SidebarMenuButton>
